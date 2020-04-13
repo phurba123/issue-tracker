@@ -1,0 +1,90 @@
+<!-- this welcome page consist user sign in and signout functionality included -->
+
+<nav class="navbar navbar-expand-lg bg-success navbar-dark">
+    <a class="navbar-brand">IssueTracker</a>
+</nav>
+
+<div class="container-fluid mt-1">
+
+    <div class="row">
+        <!-- this row contains two columns -->
+
+        <!-- start of first column -->
+        <div class="col-md-5">
+            <h3 class="header-text">Welcome to Issue Tracking Tool</h3>
+            <small class="small-text">collaborate with other users to observe and resolve issues</small>
+        </div>
+        <!-- end of first column -->
+
+        <!-- start of second column -->
+        <div class="col-md-6 mt-1 mt-md-0">
+            <!-- div for login -->
+            <div>
+                <form>
+                    <div class="row form-row">
+                        <div class="form-group col">
+                            <input type="text" class="form-control" [(ngModel)]="loginEmail" name="loginEmail"
+                            placeholder="Email">
+                        </div>
+                        <div class="form-group col">
+                            <input type="text" class="form-control" [(ngModel)]="loginPassword" name="loginPassword" 
+                            placeholder="Password">
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" (click)="login()">Login</button>
+                        </div>
+
+                    </div>
+                    <div class="row justify-content-end">
+                        <a type="button"><small class="text-muted">forgot password?</small></a>
+                    </div>
+                </form>
+            </div>
+            <!-- end of div for login -->
+            <hr>
+
+            <!-- div for signup -->
+            <div>
+                <small class="small-text">Not registered yet? then sign up</small>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6 border rounded">
+                    <form class="py-1">
+                        <div class="form-group">
+                            <label for="firstName" class="sr-only">firstName</label>
+                            <input id="firstName" type="text" class="form-control" [(ngModel)]="firstName" 
+                            name="firstName" placeholder="FirstName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="sr-only">lastName</label>
+                            <input id="lastName" type="text" class="form-control" [(ngModel)]="lastName" 
+                            name="lastName" placeholder="LastName">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
+                            <input id="email" type="email" class="form-control" [(ngModel)]="signupEmail"
+                            name="signupEmail" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="mobileNumber" class="sr-only">mobileNumber</label>
+                            <input type="number" id="mobileNumber" class="form-control" [(ngModel)]="mobileNumber"
+                            name="mobileNumber" placeholder="MobileNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="sr-only">password</label>
+                            <input id="password" type="password" class="form-control" [(ngModel)]="signupPassword"
+                            name="signupPassword" placeholder="Password">
+                        </div>
+                        <button class="btn btn-primary">SignUp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end of second column -->
+
+    </div>
+    <!-- end of main row -->
+
+</div>
+<!-- end of container-fluid -->
