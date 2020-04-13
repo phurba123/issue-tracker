@@ -21,4 +21,18 @@ export class UserService {
 
     return this.http.post(`${this.baseUrl}/signin`,params);
   }
+  // end of login
+
+  //signup service
+  public signUp(data)
+  {
+    const params = new HttpParams()
+    .set('firstName',data.firstName)
+    .set('lastName',data.lastName)
+    .set('email',data.email)
+    .set('password',data.password)
+    .set('mobileNumber',data.mobileNumber)
+
+    return this.http.post(`${this.baseUrl}/signup`,params);
+  }
 }

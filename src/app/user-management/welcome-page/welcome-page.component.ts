@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../user.service'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-welcome-page',
@@ -17,7 +18,8 @@ export class WelcomePageComponent implements OnInit {
   public signupPassword:string;
 
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private toastr:ToastrService
   ) { }
 
   ngOnInit() {
@@ -26,14 +28,13 @@ export class WelcomePageComponent implements OnInit {
   //login function
   public login()
   {
-    console.log(this.loginEmail)
     if(!this.loginEmail)
     {
-      //
+      this.toastr.warning('Enter email')
     }
     else if(!this.loginPassword)
     {
-      //
+      this.toastr.warning('Enter password')
     }
     else
     {
@@ -42,10 +43,70 @@ export class WelcomePageComponent implements OnInit {
         {
           if(apiresponse['status']===200)
           {
-            console.log('login successfull')
+            this.toastr.success('login successfull');
+            console.log('ll')
           }
           else{
             console.log('api : ', apiresponse)
+          }
+        },
+        (error)=>
+        {
+          console.log(error)
+        }
+      )
+    }
+  }//end of login funcion
+
+  public signUp()
+  {
+    if(!this.firstName)
+    {
+      this.toastr.warning('Enter firstName')
+    }
+    else if(!this.lastName)
+    {
+      this.toastr.warning('Enter lastName');
+    }
+    else if(!this.mobileNumber)
+    {
+      this.toastr.warning('Enter mobileNumber')
+    }
+    else if(!this.signupEmail)
+    {
+      this.toastr.warning('Enter email');
+    }
+    else if(!this.signupPassword)
+    {
+      this.toastr.warning('Enter password')
+    }
+    else
+    {
+      let data={
+        firstName:this.firstName,
+        lastName:this.lastName,
+        email:this.signupEmail,
+        password:this.signupPassword,
+        mobileNumber:this.mobileNumber
+      }
+      this.userService.signUp(data).subscribe(
+        (apiresponse)=>
+        {
+          if(apiresponse['status']===200)
+          {
+            this.toastr.success('signup successfull');
+            
+            //cleanup input fields
+            this.firstName='';
+            this.lastName='';
+            this.signupEmail='';
+            this.signupPassword='';
+            this.mobileNumber=null;
+          }
+          else
+          {
+            this.toastr.error(apiresponse['message'])
+            console.log(apiresponse)
           }
         },
         (error)=>
