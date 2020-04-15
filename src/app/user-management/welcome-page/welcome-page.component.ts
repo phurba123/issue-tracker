@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../user.service'
 import { ToastrService } from 'ngx-toastr';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-welcome-page',
@@ -19,10 +20,16 @@ export class WelcomePageComponent implements OnInit {
 
   constructor(
     private userService:UserService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private router:Router
   ) { }
 
   ngOnInit() {
+    //maintaining session from local storage
+    if(this.userService.getUserDetailsFromLocalStorage())
+    {
+      this.router.navigate(['/home'])
+    }
   }
 
   //login function
@@ -43,8 +50,25 @@ export class WelcomePageComponent implements OnInit {
         {
           if(apiresponse['status']===200)
           {
-            this.toastr.success('login successfull');
-            console.log('ll')
+            //this.toastr.success('login successfull');
+            console.log(apiresponse)
+
+            //set user details on local storage
+            let data=
+            {
+              authToken:apiresponse['data']['authToken'],
+              userId:apiresponse['data']['userDetails']['userId'],
+              firstName:apiresponse['data']['userDetails']['firstName']
+            }
+            this.userService.setUserDetailsOnLocalStorage(data);
+            // end of setting userdetails on local storage
+
+            //navigate to home page after logging successfully
+            setTimeout(()=>
+            {
+              this.router.navigate(['/home'])
+            },100);
+            
           }
           else{
             console.log('api : ', apiresponse)
@@ -116,5 +140,6 @@ export class WelcomePageComponent implements OnInit {
       )
     }
   }
+
 
 }

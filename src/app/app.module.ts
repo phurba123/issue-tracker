@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { UserManagementModule } from './user-management/user-management.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr'
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {ToastrModule} from 'ngx-toastr'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    DashboardModule,
+    ErrorsModule,
     UserManagementModule,
     HttpClientModule,
     ToastrModule.forRoot({

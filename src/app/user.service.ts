@@ -12,6 +12,10 @@ export class UserService {
     private http:HttpClient
   ) { }
 
+  /**
+   * User Management
+   */
+
   // login service
   public login(email,password):Observable<any>
   {
@@ -35,4 +39,28 @@ export class UserService {
 
     return this.http.post(`${this.baseUrl}/signup`,params);
   }
+
+  /**
+   * End of User Management
+   */
+
+   /**
+    * use of Local storage
+    */
+
+    //set user details on local storage
+    public setUserDetailsOnLocalStorage(data)
+    {
+      localStorage.setItem('userDetails',JSON.stringify(data));
+    }
+
+    //get user details 
+    public getUserDetailsFromLocalStorage()
+    {
+      return JSON.parse(localStorage.getItem('userDetails'));
+    }
+
+    /**
+     * End of use of Local Storage
+     */
 }
