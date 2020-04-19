@@ -4,6 +4,9 @@ import { WelcomePageComponent } from './user-management/welcome-page/welcome-pag
 import { HomeComponent } from './dashboard/home/home.component';
 import { CreateComponent } from './dashboard/create/create.component';
 import { NotfoundComponent } from './errors/notfound/notfound.component';
+import { AllissuesComponent } from './dashboard/allissues/allissues.component';
+import { MyReportsComponent } from './dashboard/my-reports/my-reports.component';
+import { IssueDetailComponent } from './dashboard/issue-detail/issue-detail.component';
 
 
 const routes: Routes = [
@@ -11,7 +14,10 @@ const routes: Routes = [
   {path:'',redirectTo:'welcome',pathMatch:'full'},
   {path:'home',component:HomeComponent},
   {path:'create',component:CreateComponent},
-  {path:'**',component:NotfoundComponent}
+  {path:'issues',component:AllissuesComponent},
+  {path:'reports',component:MyReportsComponent},
+  {path:'issue/:issueId/view',component:IssueDetailComponent},
+  {path:'**',component:NotfoundComponent},
 ];
 
 @NgModule({

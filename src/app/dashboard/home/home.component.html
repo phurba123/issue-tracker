@@ -1,11 +1,40 @@
-<app-navbar></app-navbar>
+<app-navbar [active]="'home'"></app-navbar>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- column for search -->
+        <div class="col-md-2">
+            <input type="text" placeholder="Type to search..." class="form-control">
+        </div>
+
+        <!-- second column -->
+        <div class="col-md-6 m-md-4 mt-2">
+            <table class="table table-responsive-sm table-bordered table-hover rounded table-dark ">
+                <caption>List of issues assigned to you</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Reporter</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let issue of assignedIssues" (click)="navigateToIssueDetail(issue.issueId)">
+                        <td>{{issue.title}}</td>
+                        <td>{{issue.status}}</td>
+                        <td>{{issue.reporter.reporterName}}</td>
+                        <td>{{issue.createdOn | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end of second column -->
+    </div>
+</div>
 
 <!-- create icon -->
 <!-- <i class="fa fa-plus fa-3x" id="create-icon" aria-hidden="true"></i> -->
 <a [routerLink]="['/create']"><i class="fa fa-plus-circle fa-3x" id="create-icon" title="Create new issue"
     aria-hidden="true"></i>
 </a>
-
-<div class="container-fluid">
-    <!--  -->
-</div>

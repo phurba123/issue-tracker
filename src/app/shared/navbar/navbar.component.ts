@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UserService } from 'src/app/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +8,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  private myAuth;
+  public activeComp:string;
 
-  constructor() { }
+  @Input() active:string;
+
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.myAuth = this.userService.getUserDetailsFromLocalStorage().authToken;
+    this.activeComp=this.active;
+  }
+
+  public logout() {
+    // console.log(this.myAuth)
+    this.userService.logout(this.myAuth).subscribe(
+      (apiresponse) => {
+        if (apiresponse['status'] === 200) {
+          //remove userdetails from local storage 
+          this.userService.removeUserDetailsFromLocalStorage();
+
+          // navigate to welcome page after logging out
+          this.router.navigate(['/welcome']);
+        }
+        else {
+          console.log(apiresponse)
+        }
+      },
+      (error) => {
+        //handle error
+      }
+    )
+  }
+
+  //navigating home page
+  public navigateHome()
+  {
+    //if current component is not home page then only navigate to home
+    if(this.activeComp!='home')
+    {
+      this.router.navigate(['/home'])
+    }
   }
 
 }

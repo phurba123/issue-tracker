@@ -1,0 +1,29 @@
+<app-navbar [active]="'issues'"></app-navbar>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <table class="table table-responsive-sm table-bordered table-hover table-dark">
+                <caption>Issues reported by you</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Reporter</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let report of myReports">
+                        <td>{{report.title}}</td>
+                        <td>{{report.status}}</td>
+                        <td>{{report.reporter.reporterName}}</td>
+                        <td>{{report.createdOn | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

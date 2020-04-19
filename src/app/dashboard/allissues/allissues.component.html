@@ -1,0 +1,29 @@
+<app-navbar [active]="'issues'"></app-navbar>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <table class="table table-responsive-sm table-bordered table-hover table-dark">
+                    <caption>These are list of all issues</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Reporter</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let issue of allIssues">
+                        <td>{{issue.title}}</td>
+                        <td>{{issue.status}}</td>
+                        <td>{{issue.reporter.reporterName}}</td>
+                        <td>{{issue.createdOn | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+    <div class="row ">
+        <!-- column-1 -->
+        <div class="col-md-6">
+            <h3 class="text-info text-center">Issue Detail</h3>
+            <div *ngIf="issueDetail" class="border p-1 bg-secondary rounded text-white">
+                <div class="row no-gutters ml-md-5 text-justify">
+                    <cite class="font-weight-light">Title : </cite>
+                    <p class="ml-1">{{issueDetail?.title}}</p>
+                    <button class="btn btn-primary ml-auto mr-1">watchers</button>
+                </div>
+                <div class="row no-gutters ml-md-5 text-justify">
+                        <cite class="font-weight-light">Status : </cite>
+                        <p class="ml-1">{{issueDetail?.status}}</p>
+                </div>
+                <div class="row no-gutters ml-md-5 text-justify">
+                        <cite class="font-weight-light">Description : </cite>
+                        <p class="ml-1">{{issueDetail?.description}}</p>
+                </div>
+                <div class="row no-gutters ml-md-5 text-justify">
+                    
+                </div>
+                <div class="row no-gutters ml-md-5 text-justify">
+                        <cite class="font-weight-light">Reporter : </cite>
+                        <p class="ml-1">{{issueDetail?.reporter.reporterName}}</p>
+                </div>
+                <div class="row no-gutters ml-md-5 text-justify">
+                        <cite class="font-weight-light">ReportedOn : </cite>
+                        <p class="ml-1">{{issueDetail?.createdOn |date}}</p>
+                </div>
+                <div class="row no-gutters justify-content-between">
+                    <button class="btn btn-dark text-white">Back</button>
+                    <button class="btn btn-primary text-white">Edit</button>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <!-- end of column-1 -->
+
+        <!-- column-2 -->
+        <div class="col-md-4 offset-md-2">
+            <div class="form-group ">
+                <label for="comments" class="sr-only">Comments</label>
+                <input type="text" id="comments" class="form-control" placeholder="comment...">
+            </div>
+        </div>
+        <!-- end of column-2 -->
+
+    </div>
+</div>

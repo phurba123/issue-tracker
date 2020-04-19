@@ -40,6 +40,19 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/signup`,params);
   }
 
+  //logout
+  public logout(authToken)
+  {
+    const params = new HttpParams().set('authToken',authToken)
+    return this.http.post(`${this.baseUrl}/signout`,params);
+  }
+
+  //getting all users
+  public getAllUsers(authToken)
+  {
+    return this.http.get(`${this.baseUrl}/view/all?authToken=${authToken}`);
+  }
+
   /**
    * End of User Management
    */
@@ -58,6 +71,12 @@ export class UserService {
     public getUserDetailsFromLocalStorage()
     {
       return JSON.parse(localStorage.getItem('userDetails'));
+    }
+
+    //remove userDetails
+    public removeUserDetailsFromLocalStorage()
+    {
+      localStorage.removeItem('userDetails');
     }
 
     /**
