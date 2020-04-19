@@ -67,4 +67,18 @@ export class IssueService {
   {
     return this.http.get(`${this.baseUrl}/${issueId}/view?authToken=${authToken}`)
   }//end
+
+  //adding comments on issue
+  public addComment(data)
+  {
+    const params = new HttpParams()
+    .set('authToken',data.authToken)
+    .set('userId',data.userId)
+    .set('firstName',data.firstName)
+    .set('comment',data.comment)
+    .set('issueId',data.issueId)
+
+    return this.http.post(`${this.baseUrl}/comment/create`,params)
+  }
+
 }
