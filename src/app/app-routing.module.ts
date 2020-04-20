@@ -7,6 +7,7 @@ import { NotfoundComponent } from './errors/notfound/notfound.component';
 import { AllissuesComponent } from './dashboard/allissues/allissues.component';
 import { MyReportsComponent } from './dashboard/my-reports/my-reports.component';
 import { IssueDetailComponent } from './dashboard/issue-detail/issue-detail.component';
+import { EditComponent } from './dashboard/edit/edit.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,8 @@ const routes: Routes = [
   {path:'issues',component:AllissuesComponent},
   {path:'reports',component:MyReportsComponent},
   {path:'issue/:issueId/view',component:IssueDetailComponent},
+  {path:'issue/:issueId/edit',component:EditComponent},
+  
   {path:'**',component:NotfoundComponent},
 ];
 

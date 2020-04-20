@@ -5,7 +5,7 @@
 
         <div class="col-md-6">
             <table class="table table-responsive-sm table-bordered table-hover table-dark">
-                    <caption>These are list of all issues</caption>
+                <caption>These are list of all issues</caption>
                 <thead>
                     <tr>
                         <th scope="col">Title</th>
@@ -16,16 +16,25 @@
                 </thead>
 
                 <tbody>
-                    <tr *ngFor="let issue of allIssues">
+                    <tr *ngFor="let issue of allIssues" (click)="navigateToIssueDetail(issue.issueId)">
                         <td>{{issue.title}}</td>
                         <td>{{issue.status}}</td>
                         <td>{{issue.reporter.reporterName}}</td>
                         <td>{{issue.createdOn | date}}</td>
                         <td><button class="btn btn-primary">watch</button></td>
                     </tr>
-                    
+
                 </tbody>
+
             </table>
+            <div class="row justify-content-center text-white">
+                <div class="btn-group">
+                    <a class="btn btn-secondary" (click)="previousPage()">prev</a>
+                    <a class="btn btn-secondary" (click)="nextPage()">next</a>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

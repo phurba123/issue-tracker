@@ -3,25 +3,29 @@ import {Router,ActivatedRoute} from '@angular/router'
 import { IssueService } from 'src/app/issue.service';
 import { UserService } from 'src/app/user.service';
 import { ToastrService } from 'ngx-toastr';
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-issue-detail',
   templateUrl: './issue-detail.component.html',
-  styleUrls: ['./issue-detail.component.css']
+  styleUrls: ['./issue-detail.component.css'],
+  providers:[Location]
 })
 export class IssueDetailComponent implements OnInit {
   public issueId:string;
   public userDetail;
   public issueDetail:any;
-  public comments:any;
+  public comments:any[]=[];
   public newComment:string;
+  public assignee:any;
 
   constructor(
     private router:Router,
     private route:ActivatedRoute,
     private issueService:IssueService,
     private userService:UserService,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private location:Location
   ) { }
 
   ngOnInit(): void {
@@ -40,8 +44,15 @@ export class IssueDetailComponent implements OnInit {
         (apiresponse)=>
         {
           console.log(apiresponse)
-          this.issueDetail = apiresponse['data']
+          this.issueDetail = apiresponse['data'];
+          if(apiresponse['data']['comments'].length>0)
+          {
           this.comments = apiresponse['data']['comments']
+          this.comments = this.comments.reverse();
+
+          }
+          
+          this.assignee = apiresponse['data']['assignee']
           //console.log(this.comments)
         },
         (error)=>
@@ -75,7 +86,7 @@ export class IssueDetailComponent implements OnInit {
           {
             this.toastr.success('comment added');
             //console.log(apiresponse)
-            this.comments.push(apiresponse['data'])
+            this.comments.unshift(apiresponse['data'])
             //this.getIssueDetail()
           }
           else
@@ -89,6 +100,9 @@ export class IssueDetailComponent implements OnInit {
         }
       )
     }
+
+    //after adding comment,empty newComment
+    this.newComment="";
   }
 
   //adding comment by keypress enter
@@ -98,6 +112,11 @@ export class IssueDetailComponent implements OnInit {
     {
       this.addComment()
     }
+  }
+
+  //navigating back on clicking back button
+  public navigateBack(){
+    this.location.back()
   }
 
 }

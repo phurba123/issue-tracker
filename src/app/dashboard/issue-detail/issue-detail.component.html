@@ -21,8 +21,16 @@
                 </div>
                 <div class="row no-gutters ml-md-5 text-justify">
 
+                    <select class="rounded bg-secondary text-white">
+                        <option selected disabled>Assignees</option>
+
+                        <option *ngFor="let assign of assignee" class="bg-white" disabled>{{assign.assigneeName}}
+                        </option>
+
+                    </select>
+
                 </div>
-                <div class="row no-gutters ml-md-5 text-justify">
+                <div class="row no-gutters ml-md-5 mt-1 text-justify">
                     <cite class="font-weight-light">Reporter : </cite>
                     <p class="ml-1">{{issueDetail?.reporter.reporterName}}</p>
                 </div>
@@ -31,8 +39,9 @@
                     <p class="ml-1">{{issueDetail?.createdOn |date}}</p>
                 </div>
                 <div class="row no-gutters justify-content-between">
-                    <button class="btn btn-dark text-white">Back</button>
-                    <button class="btn btn-primary text-white">Edit</button>
+                    <button class="btn btn-dark text-white" (click)="navigateBack()">Back</button>
+                    <button class="btn btn-primary text-white"
+                        [routerLink]="['/issue',issueDetail.issueId,'edit']">Edit</button>
                 </div>
 
 
@@ -46,16 +55,19 @@
         <div class="col-md-4 offset-md-2 mt-3">
             <div class="form-group ">
                 <label for="comments" class="sr-only">Comments</label>
-                <input type="text" id="comments" class="form-control" placeholder="comment..." 
-                (keydown)="addCommentByKeyPress($event)" [(ngModel)]="newComment" name="newComment">
+                <input type="text" id="comments" class="form-control" placeholder="comment..."
+                    (keydown)="addCommentByKeyPress($event)" [(ngModel)]="newComment" name="newComment">
             </div>
-            <div *ngIf="comments">
-                <ul class="list-group" *ngFor="let comment of comments">
-                    <li class="list-group-item text-justify text-info" >
+            <div *ngIf="comments.length>0" id="list-comment" class="border border-secondary rounded">
+                <ul class="list-group " *ngFor="let comment of comments">
+                    <li class="list-group-item text-justify text-info">
                         {{comment.comment}}<br>
                         <small class="d-block text-right text-muted">{{comment.commenterName}}</small>
                     </li>
                 </ul>
+            </div>
+            <div *ngIf="comments.length===0">
+                <p class="text-muted">No comments added</p>
             </div>
         </div>
         <!-- end of column-2 -->

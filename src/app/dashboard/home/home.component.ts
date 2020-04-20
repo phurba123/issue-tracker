@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
       (apiresponse)=>
       {
         this.assignedIssues = apiresponse['data'];
-        //console.log('ass-issues : ',this.assignedIssues)
+        console.log('ass-issues : ',this.assignedIssues)
       },
       (error)=>
       {
@@ -45,12 +45,9 @@ export class HomeComponent implements OnInit {
     )
   }//end of getting issues assigned
 
-  //navigate to issue detail function
   public navigateToIssueDetail(issueId)
   {
-    if(issueId)
-    {
-      this.router.navigate([`/issue/${issueId}/view`])
-    }
+    this.router.navigate([`issue/${issueId}/view`])
   }
+
 }

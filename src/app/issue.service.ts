@@ -51,15 +51,16 @@ export class IssueService {
   }
 
   //getting all issues
-  public getAllIssues(authToken)
+  public getAllIssues(authToken,skip)
   {
-    return this.http.get(`${this.baseUrl}/view/all?authToken=${authToken}`)
+    //console.log('from service : ',authToken)
+    return this.http.get(`${this.baseUrl}/view/all?authToken=${authToken}&skip=${skip}`)
   }//end of getting all issues
 
   //get all issues reported by user
-  public IssuesReportedByUser(userId,authToken)
+  public IssuesReportedByUser(userId,authToken,skip)
   {
-    return this.http.get(`${this.baseUrl}/${userId}/reported/issues?authToken=${authToken}`);
+    return this.http.get(`${this.baseUrl}/${userId}/reported/issues?authToken=${authToken}&skip=${skip}`);
   }
 
   //get issue detail by issueid

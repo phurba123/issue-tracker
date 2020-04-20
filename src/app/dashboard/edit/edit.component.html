@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-2">
+            <!-- card for form of creating new issue -->
+            <div class="card p-2">
+                <div class="card-header bg-dark">
+                    <h3 class="text-white">Edit issue</h3>
+                </div>
+
+                <div class="card-body">
+                    <form>
+                        <!-- form for title -->
+                        <div class="form-group">
+                            <label for="issue-title" class="sr-only">Title</label>
+                            <input id="issue-title" type="text" class="form-control" placeholder="Title"
+                                [(ngModel)]="title" name="title">
+                        </div>
+                        <!-- end of title -->
+
+                        <!-- dropdown for showing status options -->
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="allStatus" class="text-muted ml-3">Status</label>
+                                <select id="allStatus" class="border border-success rounded ml-1"
+                                    [(ngModel)]="selectedStatus" name="selectedStatus">
+                                    <option *ngFor="let status of statusOptions" [value]="status"
+                                        class="text-white bg-dark">{{status}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!-- field for description of issue -->
+                        <div class="form-group">
+                            <label for="issue-description" class="sr-only">description</label>
+                            <textarea id="issue-description" class="form-control form-control-sm"
+                                placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+                        </div>
+
+                        <!-- dropdown for assigning issue to any user -->
+                        <div class="dropdown" aria-describedby="dropdown-help">
+                            <button class="btn dropdown-toggle btn-outline-secondary" type="button"
+                                data-toggle="dropdown" id="assignee-dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                {{dropdownSelected}}
+                            </button>
+                            <div aria-labelledby="assignee-dropdown" class="dropdown-menu">
+                                <a type="button" class="dropdown-item style-dropdown">
+
+                                </a>
+                            </div>
+                        </div>
+                        <small id="dropdown-help" class="text-muted">assign now or you can assign it later</small>
+                        <!-- end of dropdown -->
+                    </form>
+                </div>
+
+                <!-- card-footer -->
+                <div class="card-footer">
+                    <div class="row justify-content-between">
+                        <button class="btn btn-secondary" (click)="navigateBack()">Back</button>
+                        <button class="btn btn-primary" (click)="editIssue()">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -71,7 +71,7 @@ export class WelcomePageComponent implements OnInit {
             
           }
           else{
-            console.log('api : ', apiresponse)
+            this.toastr.error(apiresponse['message'])
           }
         },
         (error)=>

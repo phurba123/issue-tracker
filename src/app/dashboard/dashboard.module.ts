@@ -8,11 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { AllissuesComponent } from './allissues/allissues.component';
 import { MyReportsComponent } from './my-reports/my-reports.component';
 import { IssueDetailComponent } from './issue-detail/issue-detail.component';
+import { EditComponent } from './edit/edit.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, CreateComponent, AllissuesComponent, MyReportsComponent, IssueDetailComponent],
+  declarations: [HomeComponent, CreateComponent, AllissuesComponent, MyReportsComponent, IssueDetailComponent, EditComponent],
   imports: [
     CommonModule,
     SharedModule,

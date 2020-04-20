@@ -3,6 +3,7 @@ import { Location } from '@angular/common'
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/user.service';
 import { IssueService } from 'src/app/issue.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -25,7 +26,8 @@ export class CreateComponent implements OnInit {
     private location: Location,
     private toastr: ToastrService,
     private userService: UserService,
-    private issueService: IssueService
+    private issueService: IssueService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -71,11 +73,16 @@ export class CreateComponent implements OnInit {
       this.issueService.createIssue(data).subscribe(
         (apiresponse) => {
           if (apiresponse['status'] === 200) {
-            console.log(apiresponse)
-            this.toastr.success('Issue created')
+            //console.log(apiresponse)
+            this.toastr.success('Issue created');
+            let issueId = apiresponse['data']['issueId'];
+            setTimeout(()=>
+            {
+              this.router.navigate([`issue/${issueId}/view`])
+            },1000)
           }
           else {
-            console.log(apiresponse)
+            this.toastr.error(apiresponse['message'])
           }
 
         },
