@@ -215,7 +215,7 @@ export class EditComponent implements OnInit {
           }
 
       }
-      console.log('data : ', data)
+      //console.log('data : ', data)
 
       this.issueService.updateIssue(data).subscribe(
         (apiresponse) => {

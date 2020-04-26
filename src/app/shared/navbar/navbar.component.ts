@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/app/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { SocketService } from 'src/app/socket.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +17,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastr:ToastrService,
+    private socketService:SocketService
   ) { }
 
   ngOnInit(): void {
@@ -36,11 +40,15 @@ export class NavbarComponent implements OnInit {
           //remove userdetails from local storage 
           this.userService.removeUserDetailsFromLocalStorage();
 
+          //disconnect socket
+          this.socketService.exitSocket();
+
           // navigate to welcome page after logging out
           this.router.navigate(['/welcome']);
         }
         else {
-          console.log(apiresponse)
+          //console.log(apiresponse)
+          this.toastr.warning(apiresponse['message'])
         }
       },
       (error) => {

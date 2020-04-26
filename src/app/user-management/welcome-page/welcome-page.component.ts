@@ -44,7 +44,7 @@ export class WelcomePageComponent implements OnInit {
         (apiresponse) => {
           if (apiresponse['status'] === 200) {
             //this.toastr.success('login successfull');
-            console.log(apiresponse)
+            //console.log(apiresponse)
 
             //set user details on local storage
             let data =
@@ -115,7 +115,7 @@ export class WelcomePageComponent implements OnInit {
           }
           else {
             this.toastr.error(apiresponse['message'])
-            console.log(apiresponse)
+            //console.log(apiresponse)
           }
         },
         (error) => {

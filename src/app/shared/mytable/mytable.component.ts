@@ -25,6 +25,7 @@ export class MytableComponent implements OnInit {
   public isStatusSorted = false;
   public isReporterSorted = false;
   public isDateSorted = false;
+  public isPaginated=false;
 
 
   constructor(
@@ -45,18 +46,22 @@ export class MytableComponent implements OnInit {
   public getIssues() {
     if (this.typeOfIssues === 'myissues') {
       this.caption = 'List of issues assigned to you';
+      this.isPaginated=true;
       this.getIssuesAssigned();
     }
     else if (this.typeOfIssues === 'allissues') {
       this.caption = 'List of all issues';
+      this.isPaginated=true;
       this.getAllIssues();
     }
     else if (this.typeOfIssues === 'myreports') {
       this.caption = 'Issues reported by you';
+      this.isPaginated=true;
       this.getReportedIssues();
     }
     else if (this.typeOfIssues === 'searchIssues') {
       if (this.searchText) {
+        this.caption="Search result"
         this.getSearchResult();
       }
     }
@@ -70,7 +75,7 @@ export class MytableComponent implements OnInit {
         }
         else {
           this.pageValue--;
-          this.toastr.warning('No more issues found');
+          this.toastr.warning('No reported issues found');
         }
 
       },
@@ -129,7 +134,7 @@ export class MytableComponent implements OnInit {
   public nextPage() {
     this.pageValue++;
     this.getIssues()
-    console.log(this.pageValue)
+    //console.log(this.pageValue)
   }
 
   //onClick prev button

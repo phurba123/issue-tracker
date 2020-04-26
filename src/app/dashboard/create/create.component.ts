@@ -185,7 +185,7 @@ export class CreateComponent implements OnInit {
   }
 
   public focused() {
-    console.log('focused')
+    //console.log('focused')
   }
 
 }

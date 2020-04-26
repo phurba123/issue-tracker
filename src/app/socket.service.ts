@@ -11,32 +11,26 @@ export class SocketService {
 
   constructor() {
     this.socket = io(this.baseUrl);
-   }
+  }
 
-    /**
-     * Events to be listened
-     */
+  /**
+   * Events to be listened
+   */
 
-     //event to listen for updates
-  public listenForUpdates(userId)
-  {
-    return Observable.create((observer)=>
-    {
-      this.socket.on(userId,(data)=>
-      {
+  //event to listen for updates
+  public listenForUpdates(userId) {
+    return Observable.create((observer) => {
+      this.socket.on(userId, (data) => {
         //console.log('observer data received : ',data)
         observer.next(data)
       })
     })
   }
-  
+
   //event to listen for auth-error
-  public listenForAuthError(userId)
-  {
-    return Observable.create((observer)=>
-    {
-      this.socket.on(`auth-error-${userId}`,(message)=>
-      {
+  public listenForAuthError(userId) {
+    return Observable.create((observer) => {
+      this.socket.on(`auth-error-${userId}`, (message) => {
         observer.next(message)
       })
     })
@@ -48,20 +42,23 @@ export class SocketService {
    * Events to be emitted
    */
 
-   //notify updates about added-comment
-   public notifyUpdates(data)
-   {
-     this.socket.emit('notify-updates',data);
-   }
+  //notify updates about added-comment
+  public notifyUpdates(data) {
+    this.socket.emit('notify-updates', data);
+  }
 
-   //emitting verify user event
-   public verifyUser(authToken,userId)
-   {
-     let data=
-     {
-       authToken:authToken,
-       userId:userId
-     }
-     this.socket.emit('verify-user',data);
-   }
+  //emitting verify user event
+  public verifyUser(authToken, userId) {
+    let data =
+    {
+      authToken: authToken,
+      userId: userId
+    }
+    this.socket.emit('verify-user', data);
+  }
+
+  //disconnect socket
+  public exitSocket = () => {
+    this.socket.disconnect();
+  }// end exit socket
 }

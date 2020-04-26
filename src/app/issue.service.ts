@@ -15,7 +15,7 @@ export class IssueService {
   public createIssue(data) {
     // if assigneeId and assigneeName is included then execute this else execute else part
     if (data.assigneeId && data.assigneeName) {
-      console.log('!data.assignee')
+      //console.log('!data.assignee')
       const params = new HttpParams()
         .set('authToken', data.authToken)
         .set('title', data.title)
