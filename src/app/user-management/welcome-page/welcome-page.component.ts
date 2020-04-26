@@ -103,13 +103,15 @@ export class WelcomePageComponent implements OnInit {
         (apiresponse) => {
           if (apiresponse['status'] === 200) {
             this.toastr.success('signup successfull');
+	    
 
             //cleanup input fields
-            this.firstName = '';
+	    this.router.navigate(['/welcome'])
+           /** this.firstName = '';
             this.lastName = '';
             this.signupEmail = '';
             this.signupPassword = '';
-            this.mobileNumber = null;
+            this.mobileNumber = null;*/
           }
           else {
             this.toastr.error(apiresponse['message'])
