@@ -1,8 +1,40 @@
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+
 .header-text
 {
-    color:#951515
+    color:#951515;
+    font-size: 28px
 }
 .small-text
 {
     color:#468499
 }
+
+@media only screen and (max-width:575px) {
+
+   .header-text
+   {
+       font-size: 22px
+   }
+   .small-text
+   {
+       font-size: 14px
+   }
+}
+@media only screen and (max-width:1000px) {
+
+    .header-text
+    {
+        font-size: 24px
+    }
+    .small-text
+    {
+        font-size: 16px
+    }
+ }

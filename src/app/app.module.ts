@@ -9,6 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {ToastrModule} from 'ngx-toastr'
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ErrorsModule } from './errors/errors.module';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import {FormsModule} from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -19,16 +21,20 @@ import { ErrorsModule } from './errors/errors.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     DashboardModule,
+    FormsModule,
+    AngularEditorModule,
     ErrorsModule,
     UserManagementModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      timeOut:1500,
+      timeOut:2000,
       positionClass:'toast-top-right',
       preventDuplicates:true
-    })
+    }),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

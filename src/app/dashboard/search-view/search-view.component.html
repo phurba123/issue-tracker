@@ -1,4 +1,4 @@
-<app-navbar [active]="'home'"></app-navbar>
+<app-navbar></app-navbar>
 
 <div class="container-fluid">
     <div class="row">
@@ -9,16 +9,14 @@
         </div>
 
         <!-- second column -->
-        <div class="col-md-6 m-md-4 mt-2">
-            <app-mytable [issueType]="'myissues'"></app-mytable>
+        <div *ngIf="!newSearch" class="col-md-6 m-md-4 mt-2">
+            <app-mytable [issueType]="'searchIssues'" [searchText]="searchText"></app-mytable>
+            
+        </div>
+        <div *ngIf="newSearch" class="col-md-6 m-md-4 mt-2">
+            <app-mytable [issueType]="'searchIssues'" [searchText]="newSearch"></app-mytable>
             
         </div>
         <!-- end of second column -->
     </div>
 </div>
-
-<!-- create icon -->
-<!-- <i class="fa fa-plus fa-3x" id="create-icon" aria-hidden="true"></i> -->
-<a [routerLink]="['/create']"><i class="fa fa-plus-circle fa-3x" id="create-icon" title="Create new issue"
-    aria-hidden="true"></i>
-</a>

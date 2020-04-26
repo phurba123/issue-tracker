@@ -4,34 +4,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-6">
-            <table class="table table-responsive-sm table-bordered table-hover table-dark">
-                <caption>Issues reported by you</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Reporter</th>
-                        <th scope="col">Date</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr *ngFor="let report of myReports" (click)="navigateToIssueDetail(report.issueId)">
-                        <td>{{report.title}}</td>
-                        <td>{{report.status}}</td>
-                        <td>{{report.reporter.reporterName}}</td>
-                        <td>{{report.createdOn | date}}</td>
-                    </tr>
-                </tbody>
-
-            </table>
-            <div class="row justify-content-center text-white">
-                <div class="btn-group">
-                    <a class="btn btn-secondary" (click)="previousPage()">prev</a>
-                    <a class="btn btn-secondary" (click)="nextPage()">next</a>
-                </div>
-
-            </div>
+            <app-mytable [issueType]="'myreports'"></app-mytable>
         </div>
     </div>
 </div>

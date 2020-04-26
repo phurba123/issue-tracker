@@ -10,12 +10,12 @@
                 </div>
 
                 <div class="card-body">
-                    <form>
+                    <form #createForm="ngForm">
                         <!-- form for title -->
                         <div class="form-group">
                             <label for="issue-title" class="sr-only">Title</label>
                             <input id="issue-title" type="text" class="form-control" placeholder="Title"
-                                [(ngModel)]="title" name="title">
+                                [(ngModel)]="title" name="title" required>
                         </div>
                         <!-- end of title -->
 
@@ -23,9 +23,10 @@
                         <div class="form-group">
                             <div class="row">
                                 <label for="allStatus" class="text-muted ml-3">Status</label>
-                                <select id="allStatus" class="border border-success rounded ml-1" [(ngModel)]="selectedStatus"
-                                    name="selectedStatus">
-                                    <option *ngFor="let status of statusOptions" [value]="status" class="text-white bg-dark">{{status}}</option>
+                                <select id="allStatus" class="border border-success rounded ml-1"
+                                    [(ngModel)]="selectedStatus" name="selectedStatus">
+                                    <option *ngFor="let status of statusOptions" [value]="status"
+                                        class="text-white bg-dark">{{status}}</option>
                                 </select>
                             </div>
 
@@ -34,8 +35,10 @@
                         <!-- field for description of issue -->
                         <div class="form-group">
                             <label for="issue-description" class="sr-only">description</label>
-                            <textarea id="issue-description" class="form-control form-control-sm"
-                                placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+                            <!-- <textarea id="issue-description" class="form-control form-control-sm"
+                                placeholder="Description" [(ngModel)]="description" name="description"></textarea> -->
+                            <angular-editor [config]="editorConfig" [(ngModel)]="description" name="description" aria-required="true">
+                            </angular-editor>
                         </div>
 
                         <!-- dropdown for assigning issue to any user -->
@@ -46,8 +49,8 @@
                                 {{dropdownSelected}}
                             </button>
                             <div aria-labelledby="assignee-dropdown" class="dropdown-menu">
-                                <a type="button" class="dropdown-item style-dropdown" *ngFor="let user of allUsersExcludingMe"
-                                (click)="selectedUser(user)">
+                                <a type="button" class="dropdown-item style-dropdown"
+                                    *ngFor="let user of allUsersExcludingMe" (click)="selectedUser(user)">
                                     {{user.firstName }} {{ user.lastName}}
 
                                 </a>
@@ -62,7 +65,7 @@
                 <div class="card-footer">
                     <div class="row justify-content-between">
                         <button class="btn btn-secondary" (click)="navigateBack()">Back</button>
-                        <button class="btn btn-primary" (click)="createIssue()">Create</button>
+                        <button class="btn btn-primary" (click)="createIssue()" [disabled]="!createForm.valid||!title||!description||!selectedStatus">Create</button>
                     </div>
                 </div>
             </div>

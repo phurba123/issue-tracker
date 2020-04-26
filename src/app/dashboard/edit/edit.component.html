@@ -35,8 +35,8 @@
                         <!-- field for description of issue -->
                         <div class="form-group">
                             <label for="issue-description" class="sr-only">description</label>
-                            <textarea id="issue-description" class="form-control form-control-sm"
-                                placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+                            <angular-editor [config]="editorConfig" [(ngModel)]="description" name="description">
+                            </angular-editor>
                         </div>
 
                         <!-- dropdown for assigning issue to any user -->
@@ -47,8 +47,9 @@
                                 {{dropdownSelected}}
                             </button>
                             <div aria-labelledby="assignee-dropdown" class="dropdown-menu">
-                                <a type="button" class="dropdown-item style-dropdown">
-
+                                <a type="button" class="dropdown-item style-dropdown"
+                                    *ngFor="let user of allUsers" (click)="selectedUser(user)">
+                                    {{user.firstName}}
                                 </a>
                             </div>
                         </div>

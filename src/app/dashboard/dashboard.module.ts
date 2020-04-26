@@ -9,16 +9,19 @@ import { AllissuesComponent } from './allissues/allissues.component';
 import { MyReportsComponent } from './my-reports/my-reports.component';
 import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 import { EditComponent } from './edit/edit.component';
+import { SearchViewComponent } from './search-view/search-view.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, CreateComponent, AllissuesComponent, MyReportsComponent, IssueDetailComponent, EditComponent],
+  declarations: [HomeComponent, CreateComponent, AllissuesComponent, MyReportsComponent, IssueDetailComponent, EditComponent, SearchViewComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    AngularEditorModule
   ]
 })
 export class DashboardModule { }

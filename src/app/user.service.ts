@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  public baseUrl="http://localhost:3200/api/v1/user";
+  public baseUrl="http://backend.issue-tracker.phursang.xyz/api/v1/user";
 
   constructor(
     private http:HttpClient
@@ -51,6 +51,13 @@ export class UserService {
   public getAllUsers(authToken)
   {
     return this.http.get(`${this.baseUrl}/view/all?authToken=${authToken}`);
+  }
+
+  //resetting passoword
+  public resetPassword(email)
+  {
+    let data ={};
+    return this.http.post(`${this.baseUrl}/${email}/forgotpassword`,data)
   }
 
   /**

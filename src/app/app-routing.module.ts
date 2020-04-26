@@ -8,6 +8,9 @@ import { AllissuesComponent } from './dashboard/allissues/allissues.component';
 import { MyReportsComponent } from './dashboard/my-reports/my-reports.component';
 import { IssueDetailComponent } from './dashboard/issue-detail/issue-detail.component';
 import { EditComponent } from './dashboard/edit/edit.component';
+import { SearchViewComponent } from './dashboard/search-view/search-view.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -19,6 +22,9 @@ const routes: Routes = [
   {path:'reports',component:MyReportsComponent},
   {path:'issue/:issueId/view',component:IssueDetailComponent},
   {path:'issue/:issueId/edit',component:EditComponent},
+  {path:'search/:searchText/view',component:SearchViewComponent},
+  {path:'server/error',component:ServerErrorComponent},
+  {path:'forgot/password',component:ForgotPasswordComponent},
   
   {path:'**',component:NotfoundComponent},
 ];

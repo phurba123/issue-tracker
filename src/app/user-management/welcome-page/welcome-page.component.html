@@ -24,11 +24,11 @@
                     <div class="row form-row">
                         <div class="form-group col">
                             <input type="text" class="form-control" [(ngModel)]="loginEmail" name="loginEmail"
-                            placeholder="Email">
+                            placeholder="Email" #emailLogin="ngModel" >
                         </div>
                         <div class="form-group col">
                             <input type="password" class="form-control" [(ngModel)]="loginPassword" name="loginPassword" 
-                            placeholder="Password">
+                            placeholder="Password" >
                         </div>
                         <div>
                             <button class="btn btn-primary" (click)="login()">Login</button>
@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="row justify-content-end">
-                        <a type="button"><small class="text-muted">forgot password?</small></a>
+                        <a type="button" [routerLink]="['/forgot/password']"><small class="text-muted small-text">forgot password?</small></a>
                     </div>
                 </form>
             </div>
@@ -50,33 +50,48 @@
 
             <div class="row justify-content-center">
                 <div class="col-md-6 border rounded">
-                    <form class="py-1">
+                    <form #signupform="ngForm" class="py-1">
                         <div class="form-group">
                             <label for="firstName" class="sr-only">firstName</label>
                             <input id="firstName" type="text" class="form-control" [(ngModel)]="firstName" 
-                            name="firstName" placeholder="FirstName">
+                            name="firstName" placeholder="FirstName" #SUfirstName="ngModel" required>
                         </div>
+                        <div [hidden]="SUfirstName.valid || SUfirstName.pristine" class="alert alert-danger">
+                                FirstName is required 
+                               </div>
                         <div class="form-group">
                             <label for="lastName" class="sr-only">lastName</label>
                             <input id="lastName" type="text" class="form-control" [(ngModel)]="lastName" 
-                            name="lastName" placeholder="LastName">
+                            name="lastName" placeholder="LastName" #SUlastName="ngModel" required>
                         </div>
+                        <div [hidden]="SUlastName.valid || SUlastName.pristine" class="alert alert-danger">
+                                LastName is required 
+                               </div>
                         <div class="form-group">
                             <label for="email" class="sr-only">Email</label>
                             <input id="email" type="email" class="form-control" [(ngModel)]="signupEmail"
-                            name="signupEmail" placeholder="Email">
+                            name="signupEmail" placeholder="Email" #SUemail="ngModel" required>
                         </div>
+                        <div [hidden]="SUemail.valid || SUemail.pristine" class="alert alert-danger">
+                                Email is required 
+                               </div>
                         <div class="form-group">
                             <label for="mobileNumber" class="sr-only">mobileNumber</label>
                             <input type="number" id="mobileNumber" class="form-control" [(ngModel)]="mobileNumber"
-                            name="mobileNumber" placeholder="MobileNumber">
+                            name="mobileNumber" placeholder="MobileNumber" #SUmobileNumber="ngModel" required>
                         </div>
+                        <div [hidden]="SUmobileNumber.valid || SUmobileNumber.pristine" class="alert alert-danger">
+                                MobileNumber is required 
+                               </div>
                         <div class="form-group">
                             <label for="password" class="sr-only">password</label>
                             <input id="password" type="password" class="form-control" [(ngModel)]="signupPassword"
-                            name="signupPassword" placeholder="Password">
+                            name="signupPassword" placeholder="Password" #SUpassword="ngModel" required>
                         </div>
-                        <button class="btn btn-primary" (click)="signUp()">SignUp</button>
+                        <div [hidden]="SUpassword.valid || SUpassword.pristine" class="alert alert-danger">
+                                Password is required 
+                               </div>
+                        <button class="btn btn-primary" [disabled]="!signupform.valid" (click)="signUp()">SignUp</button>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../user.service'
+import { UserService } from '../../user.service'
 import { ToastrService } from 'ngx-toastr';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-welcome-page',
@@ -10,132 +10,116 @@ import {Router} from '@angular/router'
 })
 export class WelcomePageComponent implements OnInit {
 
-  public loginEmail:string;
-  public loginPassword:string;
-  public firstName:any;
-  public lastName:any;
-  public mobileNumber:number;
-  public signupEmail:string;
-  public signupPassword:string;
+  public loginEmail: string;
+  public loginPassword: string;
+  public firstName: any;
+  public lastName: any;
+  public mobileNumber: number;
+  public signupEmail: string;
+  public signupPassword: string;
 
   constructor(
-    private userService:UserService,
-    private toastr:ToastrService,
-    private router:Router
+    private userService: UserService,
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     //maintaining session from local storage
-    if(this.userService.getUserDetailsFromLocalStorage())
-    {
+    if (this.userService.getUserDetailsFromLocalStorage()) {
       this.router.navigate(['/home'])
     }
   }
 
   //login function
-  public login()
-  {
-    if(!this.loginEmail)
-    {
+  public login() {
+    if (!this.loginEmail) {
       this.toastr.warning('Enter email')
     }
-    else if(!this.loginPassword)
-    {
+    else if (!this.loginPassword) {
       this.toastr.warning('Enter password')
     }
-    else
-    {
-      this.userService.login(this.loginEmail,this.loginPassword).subscribe(
-        (apiresponse)=>
-        {
-          if(apiresponse['status']===200)
-          {
+    else {
+      this.userService.login(this.loginEmail, this.loginPassword).subscribe(
+        (apiresponse) => {
+          if (apiresponse['status'] === 200) {
             //this.toastr.success('login successfull');
             console.log(apiresponse)
 
             //set user details on local storage
-            let data=
+            let data =
             {
-              authToken:apiresponse['data']['authToken'],
-              userId:apiresponse['data']['userDetails']['userId'],
-              firstName:apiresponse['data']['userDetails']['firstName']
+              authToken: apiresponse['data']['authToken'],
+              userId: apiresponse['data']['userDetails']['userId'],
+              firstName: apiresponse['data']['userDetails']['firstName']
             }
             this.userService.setUserDetailsOnLocalStorage(data);
             // end of setting userdetails on local storage
 
             //navigate to home page after logging successfully
-            setTimeout(()=>
-            {
+            setTimeout(() => {
               this.router.navigate(['/home'])
-            },100);
-            
+            }, 100);
+
           }
-          else{
+          else {
             this.toastr.error(apiresponse['message'])
           }
         },
-        (error)=>
-        {
-          console.log(error)
+        (error) => {
+          setTimeout(() => {
+            this.router.navigate(['/server/error'])
+          }, 2000);
         }
       )
     }
   }//end of login funcion
 
-  public signUp()
-  {
-    if(!this.firstName)
-    {
+  public signUp() {
+    if (!this.firstName) {
       this.toastr.warning('Enter firstName')
     }
-    else if(!this.lastName)
-    {
+    else if (!this.lastName) {
       this.toastr.warning('Enter lastName');
     }
-    else if(!this.mobileNumber)
-    {
+    else if (!this.mobileNumber) {
       this.toastr.warning('Enter mobileNumber')
     }
-    else if(!this.signupEmail)
-    {
+    else if (!this.signupEmail) {
       this.toastr.warning('Enter email');
     }
-    else if(!this.signupPassword)
-    {
+    else if (!this.signupPassword) {
       this.toastr.warning('Enter password')
     }
-    else
-    {
-      let data={
-        firstName:this.firstName,
-        lastName:this.lastName,
-        email:this.signupEmail,
-        password:this.signupPassword,
-        mobileNumber:this.mobileNumber
+    else {
+      let data = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.signupEmail,
+        password: this.signupPassword,
+        mobileNumber: this.mobileNumber
       }
       this.userService.signUp(data).subscribe(
-        (apiresponse)=>
-        {
-          if(apiresponse['status']===200)
-          {
+        (apiresponse) => {
+          if (apiresponse['status'] === 200) {
             this.toastr.success('signup successfull');
-            
+
             //cleanup input fields
-            this.firstName='';
-            this.lastName='';
-            this.signupEmail='';
-            this.signupPassword='';
-            this.mobileNumber=null;
+            this.firstName = '';
+            this.lastName = '';
+            this.signupEmail = '';
+            this.signupPassword = '';
+            this.mobileNumber = null;
           }
-          else
-          {
+          else {
             this.toastr.error(apiresponse['message'])
             console.log(apiresponse)
           }
         },
-        (error)=>
-        {
-          console.log(error)
+        (error) => {
+          setTimeout(() => {
+            this.router.navigate(['/server/error'])
+          }, 2000);
         }
       )
     }

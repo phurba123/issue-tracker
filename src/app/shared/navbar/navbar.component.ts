@@ -19,8 +19,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.myAuth = this.userService.getUserDetailsFromLocalStorage().authToken;
+    if(this.userService.getUserDetailsFromLocalStorage())
+    {
+      this.myAuth = this.userService.getUserDetailsFromLocalStorage().authToken;
+    }
+    
     this.activeComp=this.active;
+    //console.log(this.activeComp)
   }
 
   public logout() {
